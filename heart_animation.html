@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heart Animation — Figma Demo</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 36px;
+  }
+  .top-bar { font-size: 12px; color: #999; letter-spacing: 2px; text-transform: uppercase; }
+  .frames-row { display: flex; align-items: center; gap: 28px; }
+  .frame-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .frame-label { font-size: 11px; color: #888; font-weight: 600; }
+  .frame {
+    width: 160px; height: 140px;
+    border: 2px solid #3b82f6; border-radius: 6px;
+    background: #fff; display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .frame-tag {
+    position: absolute; top: -11px; left: 8px;
+    background: #3b82f6; color: #fff; font-size: 10px;
+    padding: 1px 7px; border-radius: 3px; font-weight: 600;
+  }
+  .frame-desc { font-size: 11px; color: #bbb; }
+  .arrow-col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .arrow-col span { font-size: 10px; color: #aaa; }
+  .demo-label { font-size: 13px; color: #888; }
+  .demo-frame {
+    width: 240px; height: 200px; background: #fff;
+    border: 1px solid #ddd; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .demo-frame:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.12); }
+  #heart-svg { transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1); transform: scale(1); }
+  #heart-path { transition: fill 0.35s ease, stroke 0.35s ease; }
+  #status { font-size: 13px; color: #bbb; transition: color 0.3s; }
+  .hint { font-size: 11px; color: #ccc; }
+  .student-tag { font-size: 11px; color: #bbb; margin-top: 8px; }
+</style>
+</head>
+<body>
+
+<div class="top-bar">Figma Prototype — Heart Animation</div>
+
+<div class="frames-row">
+  <div class="frame-wrap">
+    <div class="frame-label">Frame 1</div>
+    <div class="frame">
+      <div class="frame-tag">Frame 1</div>
+      <svg width="48" height="44" viewBox="0 0 48 44" fill="none">
+        <path d="M24 40L4 20C1 17 1 12 4 9C7 6 12 6 15 9L24 18L33 9C36 6 41 6 44 9C47 12 47 17 44 20L24 40Z" stroke="#aaa" stroke-width="2.5" fill="none"/>
+      </svg>
+    </div>
+    <div class="frame-desc">small · empty</div>
+  </div>
+
+  <div class="arrow-col">
+    <svg width="40" height="16" viewBox="0 0 40 16">
+      <path d="M2 8 L34 8 M28 3 L38 8 L28 13" stroke="#bbb" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>On Click</span>
+    <span>Smart Animate</span>
+  </div>
+
+  <div class="frame-wrap">
+    <div class="frame-label">Frame 2</div>
+    <div class="frame">
+      <div class="frame-tag">Frame 2</div>
+      <svg width="84" height="76" viewBox="0 0 48 44" fill="none">
+        <path d="M24 40L4 20C1 17 1 12 4 9C7 6 12 6 15 9L24 18L33 9C36 6 41 6 44 9C47 12 47 17 44 20L24 40Z" fill="#e24b4a" stroke="#e24b4a" stroke-width="1"/>
+      </svg>
+    </div>
+    <div class="frame-desc">big · red filled</div>
+  </div>
+</div>
+
+<div class="demo-label">Click the heart to preview</div>
+
+<div class="demo-frame" onclick="toggleHeart()">
+  <svg id="heart-svg" width="64" height="58" viewBox="0 0 48 44" fill="none">
+    <path id="heart-path" d="M24 40L4 20C1 17 1 12 4 9C7 6 12 6 15 9L24 18L33 9C36 6 41 6 44 9C47 12 47 17 44 20L24 40Z" stroke="#bbb" stroke-width="2.5" fill="none"/>
+  </svg>
+</div>
+
+<div id="status">tap to animate</div>
+<div class="hint">click again to reset</div>
+<div class="student-tag">Nishith Reddy Vanga · Student ID: 202607009</div>
+
+<script>
+  let liked = false;
+  function toggleHeart() {
+    liked = !liked;
+    const svg = document.getElementById('heart-svg');
+    const path = document.getElementById('heart-path');
+    const status = document.getElementById('status');
+    if (liked) {
+      svg.style.transform = 'scale(1.65)';
+      path.setAttribute('fill', '#e24b4a');
+      path.setAttribute('stroke', '#e24b4a');
+      path.setAttribute('stroke-width', '1');
+      status.textContent = 'liked!';
+      status.style.color = '#e24b4a';
+    } else {
+      svg.style.transform = 'scale(1)';
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', '#bbb');
+      path.setAttribute('stroke-width', '2.5');
+      status.textContent = 'tap to animate';
+      status.style.color = '#bbb';
+    }
+  }
+</script>
+</body>
+</html>
